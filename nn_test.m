@@ -1,6 +1,22 @@
 clear
+rng('default')
 rate = 110e-4;
-nn_setup
+
+nn = nnetwork();
+addLayer(nn, @nnLayer, 2, 10);
+nn.last.w = initRand(nn.last.w);
+nn.last.opt.rate = rate;
+addLayer(nn, @nnRelu);
+
+addLayer(nn, @nnLayer, 10, 3);
+nn.last.w = initRand(nn.last.w);
+nn.last.opt.rate = rate;
+addLayer(nn, @nnRelu);
+
+addLayer(nn, @nnLayer, 3, 1);
+nn.last.w = initRand(nn.last.w);
+nn.last.opt.rate = rate;
+addLayer(nn, @nnSigmoid);
 
 x = [0 0; 0 1; 1 0; 1 1];
 y = [0; 1; 1; 0];
@@ -10,22 +26,28 @@ tic
 % Training
 for ii=1:numel(J)
     % Forward propagation
-    a = forwProp(stack{1},x);
+    a = forwProp(nn,x);
     
     % Loss function
     [j,d] = nnlossLog(y,a);
     %[j,d] = nnlossL2(y,a);
     
     % Back propagation
-    backProp(stack{end}, d);
+    backProp(nn, d);
     
     %Optimize
-    optimize(stack{end});
+    optimize(nn);
     
     % Save loss
     J(ii) = j;
+    if j < 1e-2
+        break
+    end
 end
 toc
+
 j
-forwProp(stack{1},x)
+forwProp(nn,x)
+
+J = J(1:ii);
 plot(J)

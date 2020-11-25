@@ -26,8 +26,8 @@ classdef nnLayer < nnBasicBlock
             params = optimize(obj.opt, params, grads);
             obj.b = params(1,:);
             obj.w = params(2:end,:);
-            if ~isempty(obj.prev)
-                optimize(obj.prev);
+            if ~isempty(obj.last)
+                optimize(obj.last);
             end
         end
     end
