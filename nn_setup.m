@@ -1,4 +1,4 @@
-clear
+% clear
 rng('default')
 
 d = [2,10,3,1];
@@ -9,7 +9,9 @@ for ii=1:numel(d)-1
     dim = {d(ii), d(ii+1)};
     ll = nnLayer(dim{:});
     ll.w = rand(size(ll.w));
+    ll.w = ll.w/norm(ll.w);
     ll.id = ii;
+    ll.opt.rate = rate;
     aa = nnRelu();
     aa.id = ii;
     stack{end+1} = ll;
@@ -19,7 +21,7 @@ aa = nnSigmoid();
 %aa = nnTanh();
 aa.id = ii;
 stack{end} = aa;
-%stack(end) = [];
+% stack(end) = [];
 
 % Link network fordwards
 for ii=1:numel(stack)-1

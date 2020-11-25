@@ -1,8 +1,7 @@
 classdef Momentum < handle
     properties
-        rate (1,1) {mustBeNumeric} = 1e-2
-        beta (1,1) {mustBeNumeric} = 1e-2
-        eps  (1,1) {mustBeNumeric} = 1e-6
+        rate (1,1) {mustBeNumeric} = 1e-3
+        beta (1,1) {mustBeNumeric} = 0.9
         hist (:,:) {mustBeNumeric}
     end
     methods
@@ -12,8 +11,8 @@ classdef Momentum < handle
             else
                 obj.hist = obj.beta*obj.hist + (1-obj.beta)*grads;
             end
-            ugrads = obj.hist;
-            params = params - obj.rate*ugrads;
+            delta = -obj.rate*obj.hist;
+            params = params + delta;
         end
     end
 end

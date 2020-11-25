@@ -1,3 +1,5 @@
+clear
+rate = 110e-4;
 nn_setup
 
 x = [0 0; 0 1; 1 0; 1 1];
@@ -12,6 +14,7 @@ for ii=1:numel(J)
     
     % Loss function
     [j,d] = nnlossLog(y,a);
+    %[j,d] = nnlossL2(y,a);
     
     % Back propagation
     backProp(stack{end}, d);
@@ -24,4 +27,5 @@ for ii=1:numel(J)
 end
 toc
 j
+forwProp(stack{1},x)
 plot(J)

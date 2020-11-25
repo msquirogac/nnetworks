@@ -8,7 +8,7 @@ classdef nnLayer < nnBasicBlock
         function obj = nnLayer(din, dout)
             obj.b(  1, dout) = 0;
             obj.w(din, dout) = 0;
-            obj.opt = RMSProp();
+            obj.opt = Adam();
         end
         function y = forward(obj, x)
             y = x*obj.w + obj.b;
