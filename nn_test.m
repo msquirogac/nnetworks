@@ -11,18 +11,17 @@ for ii=1:numel(J)
     a = forwProp(stack{1},x);
     
     % Loss function
-    %[j,d] = nnlossL2(y,a);
     [j,d] = nnlossLog(y,a);
     
     % Back propagation
     backProp(stack{end}, d);
     
     %Optimize
-    update(stack{end});
+    optimize(stack{end});
     
     % Save loss
     J(ii) = j;
 end
 toc
-
+j
 plot(J)

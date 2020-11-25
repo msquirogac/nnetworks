@@ -10,7 +10,6 @@ for ii=1:numel(d)-1
     ll = nnLayer(dim{:});
     ll.w = rand(size(ll.w));
     ll.id = ii;
-    ll.rate = 1e-2;
     aa = nnRelu();
     aa.id = ii;
     stack{end+1} = ll;

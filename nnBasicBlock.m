@@ -29,9 +29,9 @@ classdef nnBasicBlock < handle & matlab.mixin.Heterogeneous
                 dx = backProp(obj.prev, dx);
             end
         end
-        function update(obj)
+        function optimize(obj)
             if ~isempty(obj.prev)
-                update(obj.prev);
+                optimize(obj.prev);
             end
         end
     end

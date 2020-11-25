@@ -1,4 +1,4 @@
-classdef RMSProp < handle
+classdef Momentum < handle
     properties
         rate (1,1) {mustBeNumeric} = 1e-2
         beta (1,1) {mustBeNumeric} = 1e-2
@@ -8,11 +8,11 @@ classdef RMSProp < handle
     methods
         function params = optimize(obj, params, grads)
             if isempty(obj.hist)
-                obj.hist = grads.^2;
+                obj.hist = grads;
             else
-                obj.hist = obj.beta*obj.hist + (1-obj.beta)*(grads.^2);
+                obj.hist = obj.beta*obj.hist + (1-obj.beta)*grads;
             end
-            ugrads = grads./(sqrt(obj.hist)+obj.eps);
+            ugrads = obj.hist;
             params = params - obj.rate*ugrads;
         end
     end

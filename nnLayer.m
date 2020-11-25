@@ -1,17 +1,14 @@
 classdef nnLayer < nnBasicBlock
     properties
-        w     (:,:) {mustBeNumeric}
         b     (1,:) {mustBeNumeric}
-        rate  (:,:) {mustBeNumeric} = 1e-3
-        optw
-        optb
+        w     (:,:) {mustBeNumeric}
+        opt
     end
     methods
         function obj = nnLayer(din, dout)
-            obj.w(din, dout) = 0;
             obj.b(  1, dout) = 0;
-            obj.optw = RMSProp();
-            obj.optb = RMSProp();
+            obj.w(din, dout) = 0;
+            obj.opt = RMSProp();
         end
         function y = forward(obj, x)
             y = x*obj.w + obj.b;
@@ -20,14 +17,17 @@ classdef nnLayer < nnBasicBlock
             dy = obj.w;
             dx = dj*dy';
         end
-        function update(obj)
+        function optimize(obj)
             dy = obj.x;
-            dw = dy'*obj.dj;
             db = sum(obj.dj, 1);
-            obj.w = obj.w - obj.rate*compute(obj.optw, dw);
-            obj.b = obj.b - obj.rate*compute(obj.optb, db);
+            dw = dy'*obj.dj;
+            params = vertcat(obj.b, obj.w);
+            grads = vertcat(db, dw);
+            params = optimize(obj.opt, params, grads);
+            obj.b = params(1,:);
+            obj.w = params(2:end,:);
             if ~isempty(obj.prev)
-                update(obj.prev);
+                optimize(obj.prev);
             end
         end
     end
