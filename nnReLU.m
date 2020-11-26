@@ -5,7 +5,7 @@ classdef nnReLU < nnBasicBlock
         end
         function dx = backward(obj, dj)
             dy = ones(size(obj.y));
-            dy(obj.y<0) = 0;
+            dy(obj.x<0) = 0;
             dx = dj.*dy;
         end
     end

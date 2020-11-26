@@ -1,4 +1,4 @@
-classdef Adam < handle
+classdef adam < optimizers
     properties
         rate  (1,1) {mustBeNumeric} = 1e-3
         beta1 (1,1) {mustBeNumeric} = 0.9

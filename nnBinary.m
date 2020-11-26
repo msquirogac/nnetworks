@@ -7,7 +7,7 @@ classdef nnBinary < nnBasicBlock
             y = 1*(x>=0);
         end
         function dx = backward(obj, dj)
-            dy = 1*(abs(obj.y)<obj.eps);
+            dy = 1*(abs(obj.x)<obj.eps);
             dx = dj.*dy;
         end
     end

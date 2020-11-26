@@ -8,7 +8,7 @@ classdef nnLReLU < nnBasicBlock
         end
         function dx = backward(obj, dj)
             dy = ones(size(obj.y));
-            dy(obj.y<0) = obj.b;
+            dy(obj.x<0) = obj.b;
             dx = dj.*dy;
         end
     end

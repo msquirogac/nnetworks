@@ -1,6 +1,6 @@
 clear
 rng('default')
-load SimData01.mat
+load TrainingData01
 
 rate = 1e-4;
 nn = nnetwork();
@@ -11,3 +11,5 @@ nn.last.opt.rate = rate;
 
 Xt = [X U];
 Yt = Y;
+
+runTraining
