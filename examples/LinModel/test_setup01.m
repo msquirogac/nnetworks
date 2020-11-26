@@ -9,5 +9,5 @@ nn.last.w = initRand(nn.last.w);
 nn.last.b = initRand(nn.last.b);
 nn.last.opt.rate = rate;
 
-x = [X U];
-y = Y;
+Xt = [X U];
+Yt = Y;

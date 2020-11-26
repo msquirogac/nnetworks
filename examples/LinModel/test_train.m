@@ -1,6 +1,6 @@
 eps = 1e-5;
 n = 20000;
-J=zeros(n, size(y,2));
+J = zeros(n, size(Yt,2));
 
 jBest = 1e30;
 nBest = nn;
@@ -8,10 +8,10 @@ tic
 % Training
 for ii=1:n
     % Forward propagation
-    a = forwProp(nn,x);
+    a = forwProp(nn,Xt);
     
     % Loss function
-    [j,d] = nnlossL2(y,a);
+    [j,d] = nnlossL2(Yt,a);
     
     % Back propagation
     backProp(nn, d);

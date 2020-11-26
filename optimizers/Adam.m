@@ -11,10 +11,10 @@ classdef Adam < handle
         function params = optimize(obj, params, grads)
             if isempty(obj.hist1)
                 obj.hist1 = grads;
-                obj.hist2 = grads.^2;
+                obj.hist2 = grads.*grads;
             else
                 obj.hist1 = obj.beta1*obj.hist1 + (1-obj.beta1)*(grads);
-                obj.hist2 = obj.beta2*obj.hist2 + (1-obj.beta2)*(grads.^2);
+                obj.hist2 = obj.beta2*obj.hist2 + (1-obj.beta2)*(grads.*grads);
             end
             v1 = obj.hist1/(1-obj.beta1);
             v2 = obj.hist2/(1-obj.beta1);

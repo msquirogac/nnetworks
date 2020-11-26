@@ -8,13 +8,14 @@ addLayer(nn, @nnLayer, 1, 7);
 nn.last.w = initRand(nn.last.w);
 nn.last.b = initRand(nn.last.b);
 nn.last.opt.rate = rate;
-addLayer(nn, @nnRelu);
+addLayer(nn, @nnReLU);
 
 addLayer(nn, @nnLayer, 7, 1);
 nn.last.w = initRand(nn.last.w);
 nn.last.b = initRand(nn.last.b);
+nn.last.opt.rate = rate;
 
 xb = 100;
-x  = X+xb;
-y  = Y+xb;
+Xt  = X+xb;
+Yt  = Y+xb;
 

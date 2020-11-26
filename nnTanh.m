@@ -4,7 +4,7 @@ classdef nnTanh < nnBasicBlock
             y = tanh(x);
         end
         function dx = backward(obj, dj)
-            dy = 1-obj.y.^2;
+            dy = 1-obj.y.*obj.y;
             dx = dj.*dy;
         end
     end
