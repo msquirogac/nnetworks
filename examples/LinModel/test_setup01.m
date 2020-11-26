@@ -1,6 +1,6 @@
 clear
 rng('default')
-load SimData.mat
+load SimData01.mat
 
 rate = 1e-4;
 nn = nnetwork();
