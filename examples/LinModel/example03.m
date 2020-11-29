@@ -16,9 +16,8 @@ nn.last.b = initRand(nn.last.b);
 nn.last.opt.rate = rate;
 
 xb = 100;
-Xt  = X+xb;
-Yt  = Y+xb;
+Xt = X+xb;
+Yt = Y+xb;
 
-[J, iter]= nnTraining(nn, @nnlossL2, Xt, Yt, 20000, 1e-2);
+[J, iter] = nnTraining(nn, @nnlossL2, Xt, Yt, 20000, 1e-2);
 plot(J)
-

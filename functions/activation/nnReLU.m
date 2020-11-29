@@ -4,7 +4,7 @@ classdef nnReLU < nnBasicBlock
             y = max(0,x);
         end
         function dx = backward(obj, dj)
-            dy = ones(size(obj.y));
+            dy = ones(size(obj.x));
             dy(obj.x<0) = 0;
             dx = dj.*dy;
         end

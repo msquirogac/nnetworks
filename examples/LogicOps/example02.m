@@ -16,7 +16,5 @@ nn.last.b = initRand(nn.last.b);
 nn.last.opt.rate = rate;
 addLayer(nn, @nnSigmoid);
 
-[J, i]= nnTraining(nn, @nnlossLog, Xt, Yt, 10000, 1e-4);
+[J, iter] = nnTraining(nn, @nnlossLog, Xt, Yt, 10e3, 1e-2);
 plot(J)
-
-forwProp(nn,Xt)

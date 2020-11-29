@@ -12,5 +12,5 @@ nn.last.opt.rate = rate;
 Xt = [X U];
 Yt = Y;
 
-[J, i]= nnTraining(nn, @nnlossL2, Xt, Yt, 10000, 1e-2);
+[J, iter] = nnTraining(nn, @nnlossL2, Xt, Yt, 10000, 1e-2);
 plot(J)

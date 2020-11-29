@@ -178,3 +178,36 @@ assert(all(ismembertol(d1, backProp(af, j1),1e-8)))
 d2 = dfcn(f,x).*j2;
 assert(all(ismembertol(d2, backProp(af, j2),1e-8)))
 disp('Pass')
+
+% Testing nnELU
+disp('Testing nnELU')
+clearvars -except x j1 j2
+af = nnELU();
+b=2;
+f  = @(x) x.*(x>0) + (exp(x)-1).*(x<=0);
+y  = f(x);
+assert(all(ismembertol(y, forwProp(af, x),1e-8)))
+
+d1 = dfcn(f,x).*j1;
+assert(all(ismembertol(d1, backProp(af, j1),1e-6)))
+
+d2 = dfcn(f,x).*j2;
+assert(all(ismembertol(d2, backProp(af, j2),1e-6)))
+disp('Pass')
+
+% Testing nnCELU
+disp('Testing nnCELU')
+clearvars -except x j1 j2
+af = nnCELU();
+b=4;
+af.b=b;
+f  = @(x) x.*(x>0) + b*(exp(x/b)-1).*(x<=0);
+y  = f(x);
+assert(all(ismembertol(y, forwProp(af, x),1e-8)))
+
+d1 = dfcn(f,x).*j1;
+assert(all(ismembertol(d1, backProp(af, j1),1e-6)))
+
+d2 = dfcn(f,x).*j2;
+assert(all(ismembertol(d2, backProp(af, j2),1e-6)))
+disp('Pass')
