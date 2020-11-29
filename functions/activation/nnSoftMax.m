@@ -3,14 +3,14 @@ classdef nnSoftMax < nnBasicBlock
         ise
     end
     methods
-        function y = forward(obj, x)
+        function x = forward(obj, x)
             ex = exp(x);
             obj.ise = 1./sum(ex,1);
-            y = ex.*obj.ise;
+            x = ex.*obj.ise;
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
             dy = obj.y - obj.ise.*obj.ise;
-            dx = dj.*dy;
+            dj = dj.*dy;
         end
     end
 end

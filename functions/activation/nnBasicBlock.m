@@ -2,8 +2,6 @@ classdef nnBasicBlock < handle & matlab.mixin.Heterogeneous
     properties
         x    (:,:) {mustBeNumeric}
         y    (:,:) {mustBeNumeric}
-        dx   (:,:) {mustBeNumeric}
-        dj   (:,:) {mustBeNumeric}
         last nnBasicBlock
         next nnBasicBlock
         id   (1,1) {mustBeNumeric} = 0
@@ -21,12 +19,10 @@ classdef nnBasicBlock < handle & matlab.mixin.Heterogeneous
                 y = forwProp(obj.next, y);
             end
         end
-        function dx = backProp(obj, dj)
-            dx = backward(obj, dj);
-            obj.dj = dj;
-            obj.dx = dx;
+        function dj = backProp(obj, dj)
+            dj = backward(obj, dj);
             if ~isempty(obj.last)
-                dx = backProp(obj.last, dx);
+                dj = backProp(obj.last, dj);
             end
         end
         function optimize(obj)

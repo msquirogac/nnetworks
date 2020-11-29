@@ -1,11 +1,11 @@
 classdef nnSigmoid < nnBasicBlock
     methods
-        function y = forward(obj, x)  %#ok<INUSL>
-            y = 1./(1+exp(-x));
+        function x = forward(obj, x)  %#ok<INUSL>
+            x = 1./(1+exp(-x));
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
             dy = obj.y.*(1-obj.y);
-            dx = dj.*dy;
+            dj = dj.*dy;
         end
     end
 end

@@ -1,11 +1,11 @@
 classdef nnTanh < nnBasicBlock
     methods
-        function y = forward(obj, x)  %#ok<INUSL>
-            y = tanh(x);
+        function x = forward(obj, x)  %#ok<INUSL>
+            x = tanh(x);
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
             dy = 1-obj.y.*obj.y;
-            dx = dj.*dy;
+            dj = dj.*dy;
         end
     end
 end

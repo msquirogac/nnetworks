@@ -4,6 +4,9 @@ classdef nnLayer < nnBasicBlock
         w     (:,:) {mustBeNumeric}
         opt
     end
+    properties (Access = private)
+        dj    (:,:) {mustBeNumeric}
+    end
     methods
         function obj = nnLayer(din, dout)
             obj.b(  1, dout) = 0;
@@ -13,9 +16,10 @@ classdef nnLayer < nnBasicBlock
         function y = forward(obj, x)
             y = x*obj.w + obj.b;
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
+            obj.dj = dj;
             dy = obj.w;
-            dx = dj*dy';
+            dj = dj*dy';
         end
         function optimize(obj)
             dy = obj.x;
