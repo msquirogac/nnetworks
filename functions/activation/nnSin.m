@@ -1,11 +1,11 @@
 classdef nnSin < nnBasicBlock
     methods
-        function y = forward(obj, x)  %#ok<INUSL>
-            y = sin(x);
+        function x = forward(obj, x)  %#ok<INUSL>
+            x = sin(x);
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
             dy = cos(obj.x);
-            dx = dj.*dy;
+            dj = dj.*dy;
         end
     end
 end

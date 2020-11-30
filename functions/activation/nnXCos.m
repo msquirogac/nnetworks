@@ -1,11 +1,11 @@
 classdef nnXCos < nnBasicBlock
     methods
-        function y = forward(obj, x)  %#ok<INUSL>
-            y = x.*cos(x);
+        function x = forward(obj, x)  %#ok<INUSL>
+            x = x.*cos(x);
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
             dy = cos(obj.x) - obj.x.*sin(obj.x);
-            dx = dj.*dy;
+            dj = dj.*dy;
         end
     end
 end

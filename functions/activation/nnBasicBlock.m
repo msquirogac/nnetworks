@@ -1,22 +1,20 @@
 classdef nnBasicBlock < handle & matlab.mixin.Heterogeneous
     properties
         x    (:,:) {mustBeNumeric}
-        y    (:,:) {mustBeNumeric}
         last nnBasicBlock
         next nnBasicBlock
         id   (1,1) {mustBeNumeric} = 0
     end
     methods (Abstract)
-        y  = forward(obj, x)
-        dx = backward(obj, dj)
+        x  = forward(obj, x)
+        dj = backward(obj, dj)
     end
     methods
-        function y = forwProp(obj, x)
-            y = forward(obj, x);
+        function x = forwProp(obj, x)
             obj.x = x;
-            obj.y = y;
+            x = forward(obj, x);
             if ~isempty(obj.next)
-                y = forwProp(obj.next, y);
+                x = forwProp(obj.next, x);
             end
         end
         function dj = backProp(obj, dj)

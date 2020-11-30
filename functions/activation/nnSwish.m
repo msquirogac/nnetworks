@@ -7,14 +7,14 @@ classdef nnSwish < nnBasicBlock
         sg
     end
     methods
-        function y = forward(obj, x)
+        function x = forward(obj, x)
             obj.bx = obj.b*x;
             obj.sg = 1./(1+exp(-obj.bx));
-            y = x.*obj.sg;
+            x = x.*obj.sg;
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
             dy = obj.sg.*(1 + obj.bx.*(1 - obj.sg));
-            dx = dj.*dy;
+            dj = dj.*dy;
         end
     end
 end

@@ -13,8 +13,8 @@ classdef nnLayer < nnBasicBlock
             obj.w(din, dout) = 0;
             obj.opt = adam();
         end
-        function y = forward(obj, x)
-            y = x*obj.w + obj.b;
+        function x = forward(obj, x)
+            x = x*obj.w + obj.b;
         end
         function dj = backward(obj, dj)
             obj.dj = dj;

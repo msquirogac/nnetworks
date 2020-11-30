@@ -1,11 +1,11 @@
 classdef nnAtan < nnBasicBlock
     methods
-        function y = forward(obj, x)  %#ok<INUSL>
-            y = atan(x);
+        function x = forward(obj, x)  %#ok<INUSL>
+            x = atan(x);
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
             dy = 1./(1+obj.x.*obj.x);
-            dx = dj.*dy;
+            dj = dj.*dy;
         end
     end
 end

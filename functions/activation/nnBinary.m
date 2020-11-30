@@ -3,12 +3,12 @@ classdef nnBinary < nnBasicBlock
         eps (1,1) {mustBeNumeric} = 1e-3
     end
     methods
-        function y = forward(obj, x)  %#ok<INUSL>
-            y = 1*(x>=0);
+        function x = forward(obj, x)  %#ok<INUSL>
+            x = 1*(x>=0);
         end
-        function dx = backward(obj, dj)
+        function dj = backward(obj, dj)
             dy = 1*(abs(obj.x)<obj.eps);
-            dx = dj.*dy;
+            dj = dj.*dy;
         end
     end
 end

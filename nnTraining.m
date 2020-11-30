@@ -1,8 +1,8 @@
 function [J, iter] = nnTraining(network, lossfcn, xt, yt, niter, tol)
 validateattributes(network,{'nnetwork'},{'nonempty'},'','');
 validateattributes(lossfcn,{'function_handle'},{'nonempty'},'','');
-validateattributes(xt,{'numeric'},{'nonempty'},'','');
-validateattributes(yt,{'numeric'},{'nonempty'},'','');
+validateattributes(xt,{'numeric','gpuArray'},{'nonempty'},'','');
+validateattributes(yt,{'numeric','gpuArray'},{'nonempty'},'','');
 
 if nargin < 6
     tol = 1e-2;
@@ -11,7 +11,7 @@ if nargin < 5
     niter = 1000;
 end
 
-J = zeros(niter, size(yt,2));
+J = zeros(niter,size(yt,2),'like',yt);
 
 tic
 % Training
