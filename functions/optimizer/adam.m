@@ -4,10 +4,17 @@ classdef adam < optimizers
         beta1 (1,1) {mustBeNumeric} = 0.9
         beta2 (1,1) {mustBeNumeric} = 0.99
         eps   (1,1) {mustBeNumeric} = 1e-8
+    end
+    properties (Access = private)
         hist1 (:,:) {mustBeNumeric}
         hist2 (:,:) {mustBeNumeric}
     end
     methods
+        function obj = adam(varargin)
+            if nargin > 0
+                obj.rate = varargin{1};
+            end
+        end
         function params = optimize(obj, params, grads)
             if isempty(obj.hist1)
                 obj.hist1 = grads;

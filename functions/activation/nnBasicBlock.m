@@ -1,8 +1,8 @@
 classdef nnBasicBlock < handle & matlab.mixin.Heterogeneous
     properties
         x    (:,:) {mustBeNumeric}
-        last nnBasicBlock
         next nnBasicBlock
+        last nnBasicBlock
         id   (1,1) {mustBeNumeric} = 0
     end
     methods (Abstract)

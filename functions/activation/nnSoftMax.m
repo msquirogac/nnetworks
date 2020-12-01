@@ -1,7 +1,7 @@
 classdef nnSoftMax < nnBasicBlock
     properties (Access = private)
-        ise  (:,:) {mustBeNumeric}
-        y    (:,:) {mustBeNumeric}
+        ise (:,:) {mustBeNumeric}
+        y   (:,:) {mustBeNumeric}
     end
     methods
         function x = forward(obj, x)

@@ -1,6 +1,6 @@
 classdef nnTanh < nnBasicBlock
     properties (Access = private)
-        y    (:,:) {mustBeNumeric}
+        y (:,:) {mustBeNumeric}
     end
     methods
         function x = forward(obj, x)

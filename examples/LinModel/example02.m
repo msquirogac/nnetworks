@@ -4,13 +4,13 @@ load TrainingData02
 
 rate = 1e-3;
 nn = nnetwork();
-addLayer(nn, @nnLayer, 1, 7);
+addLayer(nn, @nnLayer, 'din', 1, 'dout', 7);
 nn.last.w = initRand(nn.last.w);
 nn.last.b = initRand(nn.last.b);
 nn.last.opt.rate = rate;
 addLayer(nn, @nnReLU);
 
-addLayer(nn, @nnLayer, 7, 1);
+addLayer(nn, @nnLayer, 'din', 7, 'dout', 1);
 nn.last.w = initRand(nn.last.w);
 nn.last.b = initRand(nn.last.b);
 nn.last.opt.rate = rate;
