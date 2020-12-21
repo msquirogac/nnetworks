@@ -13,7 +13,6 @@ end
 
 J = zeros(niter,size(yt,2),'like',yt);
 
-tic
 % Training
 for iter=1:niter
     % Forward propagation
@@ -31,11 +30,10 @@ for iter=1:niter
     % Save loss
     J(iter,:) = j;
     if ~mod(iter,100)
-        disp("Iteration:"); disp(iter);
-        disp("Loss:"); disp(j);
+        fprintf("Iteration: %d\n",iter);
+        disp('Loss:'); disp(j);
         if all(j < tol)
             break
         end
     end
 end
-toc

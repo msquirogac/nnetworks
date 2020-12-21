@@ -1,31 +1,30 @@
 clear
 load TrainigData02
 
-rate = 400e-6;
 nn = nnetwork();
 addLayer(nn, @nnLayer, 'din', 3, 'dout', 13);
 nn.last.w = initRand(nn.last.w);
-nn.last.b = initRand(nn.last.b);
-nn.last.opt.rate = rate;
 addLayer(nn, @nnSigIdent, 'units', 1);
 
 addLayer(nn, @nnLayer, 'din', 13, 'dout', 8);
 nn.last.w = initRand(nn.last.w);
-nn.last.b = initRand(nn.last.b);
-nn.last.opt.rate = rate;
 addLayer(nn, @nnSigIdent, 'units', 1);
 
 addLayer(nn, @nnLayer, 'din', 8, 'dout', 2);
 nn.last.w = initRand(nn.last.w);
-nn.last.b = initRand(nn.last.b);
-nn.last.opt.rate = rate;
 
-xb = [0  100 20];
-yb = xb(2:3);
-Xt = Xt+xb;
-Yt = Yt+yb;
-Xv = Xv+xb;
-Yv = Yv+yb;
+f = @(x,r,b) (x-b)./r;
+g = @(x,r,b) (x.*r+b);
+xr = 2*(max(Xt)-min(Xt));
+xb = 4*min(Xt);
+yr = 2*(max(Yt)-min(Yt));
+yb = 4*min(Yt);
 
-[J, iter] = nnTraining(nn, @nnlossL2, Xt, Yt, 10e3, 100e-3);
-semilogy(J)
+Xt = f(Xt,xr,xb);
+Xv = f(Xv,xr,xb);
+Yt = f(Yt,yr,yb);
+Yv = f(Yv,yr,yb);
+
+nnSetOptimizerRate(nn, 50e-6);
+J = nnTraining(nn, @nnlossL2, Xt, Yt, 30e3, 1e-6);
+figure; semilogy(J)

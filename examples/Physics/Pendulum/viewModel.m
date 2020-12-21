@@ -1,16 +1,16 @@
-
 Ypt = forwProp(nn,Xt);
 Ypv = forwProp(nn,Xv);
 
 figure
 subplot(2,1,1)
 hold all
-plot(Yt-yb)
-plot(Ypt-yb)
+plot(Yt)
+plot(Ypt)
 
 subplot(2,1,2)
 hold all
-plot(Yv-yb)
-plot(Ypv-yb)
+plot(Yv)
+plot(Ypv)
 
-[j,~] = nnlossL2(Ypv,Yv)
+j = nnlossL2(Ypv,Yv);
+disp(j)
